@@ -44,15 +44,17 @@ void drawLine()
 
 void CALLBACK display()
 {
-	GLfloat new_color[3] = { 0.0, 1.0, 0.0 };
-
 	glClear(GL_COLOR_BUFFER_BIT);
-	glLoadIdentity();
-
+	glLoadIdentity();	
+		
+	glPushMatrix();
+	GLfloat new_color[3] = { 0.0, 1.0, 0.0 };
 	glColor3fv(new_color);
 	for (int i = 0; i < 10; i++) {
 		glCallList(listName);
 	}
+	glPopMatrix();
+
 	drawLine();
 
 	glFlush();
