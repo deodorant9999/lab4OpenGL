@@ -67,6 +67,7 @@ void CALLBACK display(void)
 	glEnd();
 	glDisable(GL_LINE_STIPPLE);
 
+	glColor3f(0.0f, 0.0f, 0.0f);
 	glMap1f(GL_MAP1_VERTEX_3, 0.0, 1.0, 3, 4, &ctrlpoints1[0][0]);
 	glBegin(GL_LINE_STRIP); // se deseneaza curba prin segmente de dreapta
 	{

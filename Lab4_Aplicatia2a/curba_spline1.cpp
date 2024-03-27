@@ -18,22 +18,34 @@ void CALLBACK display()
 	glLoadIdentity();
 
 	// 4 puncte de control
-	GLfloat ctlpoints[4][3] = {
-		{-.75, -.75, 0.0},
-		{-.5, .75, 0.0},
-		{.5, .75, 0.0},
-		{.75, -.75, 0.0}
+	GLfloat ctlpoints[16][3] = {
+		{1, 0.5, 0.0},
+		{0.5, 0.25, 0.0},
+		{0.0, 0.25, 0.0},
+		{-0.5, 0.5, 0.0},
+		{-0.85, 1.0, 0.0},
+		{-0.85, 1.5, 0.0},
+		{-0.5, 2.0, 0.0},
+		{0.0, 2.25, 0.0},
+		{0.5, 2.25, 0.0},
+		{1.0, 2.0, 0.0},
+		{1.25, 1.90, 0.0},
+		{1.25, 1.35, 0.0},
+		{1.0, 1.25, 0.0},
+		{0.85, 1.0, 0.0},
+		{0.15, 1.0, 0.0},
+		{0.0, 1.25, 0.0}
 	};
 
 	// 8 noduri
-	GLfloat knots[8] = { 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0 };
+	GLfloat knots[20] = { 0.0, 0.0, 0.0, 0.0, 1.0, 2.0, 3.0, 4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,13.0,13.0,13.0 };
 	//   GLfloat knots[8] = {0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0};
 	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3f(1.0, 1.0, 1.0); // culoarea curenta de desenare
 	// incepe corpul de redare al curbei Spline
 	gluBeginCurve(theNurb);
 	gluNurbsCurve(theNurb,	// pointer obiect NURBS
-		8, knots,			// numar noduri, tablou noduri
+		20, knots,			// numar noduri, tablou noduri
 		sizeof(ctlpoints[0]) / sizeof(GLfloat), // intervalul de valori dintre doua puncte de control consecutive
 		&ctlpoints[0][0],	// vector puncte de control
 		4,					// ordinul curbei 
@@ -50,10 +62,10 @@ void CALLBACK myReshape(GLsizei w, GLsizei h)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	if (w <= h) {
-		gluOrtho2D(-1.0, 1.0, -1.0 * (GLfloat)h / (GLfloat)w, 1.0 * (GLfloat)h / (GLfloat)w);
+		gluOrtho2D(-5.0, 5.0, -5.0 * (GLfloat)h / (GLfloat)w, 5.0 * (GLfloat)h / (GLfloat)w);
 	}
 	else {
-		gluOrtho2D(-1.0 * (GLfloat)w / (GLfloat)h, 1.0 * (GLfloat)w / (GLfloat)h, -1.0, 1.0);
+		gluOrtho2D(-5.0 * (GLfloat)w / (GLfloat)h, 5.0 * (GLfloat)w / (GLfloat)h, -5.0, 5.0);
 	}
 	glMatrixMode(GL_MODELVIEW);
 }
