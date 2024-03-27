@@ -9,7 +9,10 @@
 
 GLfloat ctrlpoints[4][3] = {
 	// coordonatele celor 4 puncte de control
-	{ -4.0, -4.0, 0.0}, { -2.0, 4.0, 0.0}, {2.0, -4.0, 0.0}, {4.0, 4.0, 0.0} };
+	{ -4.0, -4.0, 0.0}, { -4.0, 2.0, 0.0}, {4.0, 2.0, 0.0}, {4.0, -4.0, 0.0} };
+GLfloat ctrlpoints1[4][3] = {
+	{4.0,-4.0,0.0},{4.0,-10.0,0.0},{12.0,-10.0,0.0},{12.0,-4.0,0.0}
+};
 
 void myInit()
 {
@@ -37,6 +40,7 @@ void CALLBACK display(void)
 		for (int i = 0; i <= 30; i++) {
 			glEvalCoord1f((GLfloat)i / 30.0f); // pentru cele 30 varfuri determinate de functia glEvalCoord1f
 		}
+
 	}
 	glEnd();
 
@@ -63,6 +67,39 @@ void CALLBACK display(void)
 	glEnd();
 	glDisable(GL_LINE_STIPPLE);
 
+	glMap1f(GL_MAP1_VERTEX_3, 0.0, 1.0, 3, 4, &ctrlpoints1[0][0]);
+	glBegin(GL_LINE_STRIP); // se deseneaza curba prin segmente de dreapta
+	{
+		for (int i = 0; i <= 30; i++) {
+			glEvalCoord1f((GLfloat)i / 30.0f); // pentru cele 30 varfuri determinate de functia glEvalCoord1f
+		}
+
+	}
+	glEnd();
+
+	// se afiseaza punctele de control
+	glPointSize(5.0f);
+	glColor3f(1.0f, 0.0f, 0.0f);
+	glBegin(GL_POINTS);
+	{
+		for (int i = 0; i < 4; i++) {
+			glVertex3fv(&ctrlpoints1[i][0]);
+		}
+	}
+	glEnd();
+
+	// se afiseaza poligonul caracteristic
+	glColor3f(1.0f, 0.0f, 1.0f);
+	glEnable(GL_LINE_STIPPLE);
+	glBegin(GL_LINE_STRIP);
+	{
+		for (int i = 0; i < 4; i++) {
+			glVertex3fv(&ctrlpoints1[i][0]);
+		}
+	}
+	glEnd();
+	glDisable(GL_LINE_STIPPLE);
+
 	glFlush();
 }
 
@@ -73,10 +110,10 @@ void CALLBACK myReshape(GLsizei w, GLsizei h)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	if (w <= h) {
-		glOrtho(-5.0, 5.0, -5.0 * (GLfloat)h / (GLfloat)w, 5.0 * (GLfloat)h / (GLfloat)w, -5.0, 5.0);
+		glOrtho(-15.0, 15.0, -15.0 * (GLfloat)h / (GLfloat)w, 15.0 * (GLfloat)h / (GLfloat)w, -15.0, 15.0);
 	}
 	else {
-		glOrtho(-5.0 * (GLfloat)w / (GLfloat)h, 5.0 * (GLfloat)w / (GLfloat)h, -5.0, 5.0, -5.0, 5.0);
+		glOrtho(-15.0 * (GLfloat)w / (GLfloat)h, 15.0 * (GLfloat)w / (GLfloat)h, -15.0, 15.0, -15.0, 15.0);
 	}
 	glMatrixMode(GL_MODELVIEW);
 }
