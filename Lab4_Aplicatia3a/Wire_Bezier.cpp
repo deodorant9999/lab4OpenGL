@@ -10,14 +10,24 @@
 
 // se definesc cele 16 puncte de control
 GLfloat ctrlpoints[4][4][3] = {
-    {{-1.5, -1.5, 4.0}, {-0.5, -1.5, 2.0},
-    {0.5, -1.5, -1.0}, {1.5, -1.5, 2.0}},
-    {{-1.5, -0.5, 1.0}, {-0.5, -0.5, 3.0},
-    {0.5, -0.5, 0.0}, {1.5, -0.5, -1.0}},
-    {{-1.5, 0.5, 4.0}, {-0.5, 0.5, 0.0},
-    {0.5, 0.5, 3.0}, {1.5, 0.5, 4.0}},
-    {{-1.5, 1.5, -2.0}, {-0.5, 1.5, -2.0},
-    {0.5, 1.5, 0.0}, {1.5, 1.5, -1.0}}
+    {{-1.5, -1.5, -4.0}, {-0.5, -2.5, -4.0},
+    {0.5, -2.5, -4.0}, {1.5, -1.5, -4.0}},
+    {{-2.5, -0.5, -4.0}, {-2.0, -0.5, 4.0},
+    {2.0, -0.5, 4.0}, {2.5, -0.5, -4.0}},
+    {{-2.5, 0.5, -4.0}, {-2.0, 0.5, 4.0},
+    {2.0, 0.5, 4.0}, {2.5, 0.5, -4.0}},
+    {{-1.5, 1.5, -4.0}, {-0.5, 2.5, -4.0},
+    {0.5, 2.5, -4.0}, {1.5, 1.5, -4.0}}
+};
+GLfloat ctrlpoints1[4][4][3] = {
+    {{-1.5, -1.5, -4.0}, {-0.5, -2.5, -4.0},
+    {0.5, -2.5, -4.0}, {1.5, -1.5, -4.0}},
+    {{-2.5, -0.5, -4.0}, {-2.0, -0.5, -10.0},
+    {2.0, -0.5, -10.0}, {2.5, -0.5, -4.0}},
+    {{-2.5, 0.5, -4.0}, {-2.0, 0.5, -10.0},
+    {2.0, 0.5, -10.0}, {2.5, 0.5, -4.0}},
+    {{-1.5, 1.5, -4.0}, {-0.5, 2.5, -4.0},
+    {0.5, 2.5, -4.0}, {1.5, 1.5, -4.0}}
 };
 
 void CALLBACK display(void)
@@ -25,7 +35,7 @@ void CALLBACK display(void)
     glClear(GL_COLOR_BUFFER_BIT);
     
     glLoadIdentity();
-    glRotatef(85.0, 1.0, 1.0, 1.0);
+    glRotatef(-90.0, 1.0, 0.0, 0.0);
 
     //functia glMap2f defineste caracteristicile suprafetei Bezier
     // - tipul punctelor determinate de functia glEvalCoord2f
@@ -59,6 +69,26 @@ void CALLBACK display(void)
         }
         glEnd();
     }
+    glMap2f(GL_MAP2_VERTEX_3, 0, 1, 3, 4, 0, 1, 12, 4, &ctrlpoints1[0][0][0]);
+    glMapGrid2f(20, 0.0, 1.0, 20, 0.0, 1.0);
+
+    for (int j = 0; j <= 8; j++) {
+        glBegin(GL_LINE_STRIP);
+        {
+            for (int i = 0; i <= 30; i++) {
+                // evalueaza un punct pe suprafata pentru valorile u si v ale ale parametrilor
+                glEvalCoord2f((GLfloat)i / 30.0, (GLfloat)j / 8.0);
+            }
+        }
+        glEnd();
+        glBegin(GL_LINE_STRIP);
+        {
+            for (int i = 0; i <= 30; i++) {
+                glEvalCoord2f((GLfloat)j / 8.0, (GLfloat)i / 30.0);
+            }
+        }
+        glEnd();
+    }
 
     glFlush();
 }
@@ -76,10 +106,10 @@ void CALLBACK myReshape(GLsizei w, GLsizei h)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     if (w <= h) {
-        glOrtho(-4.0, 4.0, -4.0 * (GLfloat)h / (GLfloat)w, 4.0 * (GLfloat)h / (GLfloat)w, -4.0, 4.0);
+        glOrtho(-10.0, 10.0, -10.0 * (GLfloat)h / (GLfloat)w, 10.0 * (GLfloat)h / (GLfloat)w, -15.0, 15.0);
     }
     else {
-        glOrtho(-4.0 * (GLfloat)w / (GLfloat)h, 4.0 * (GLfloat)w / (GLfloat)h, -4.0, 4.0, -4.0, 4.0);
+        glOrtho(-10.0 * (GLfloat)w / (GLfloat)h, 10.0 * (GLfloat)w / (GLfloat)h, -10.0, 10.0, -15.0, 15.0);
     }
     glMatrixMode(GL_MODELVIEW);
 }
