@@ -8,7 +8,8 @@
 #include "glu.h"
 #include "glaux.h"
 
-static int shoulder = 0, elbow = 0;
+static int shoulder = 0, elbow = 0, shoulder1 = 0, elbow1=0;
+
 
 void CALLBACK elbowAdd()
 {
@@ -18,6 +19,26 @@ void CALLBACK elbowAdd()
 void CALLBACK elbowSubtract()
 {
 	elbow = (elbow - 5) % 360;
+}
+
+void CALLBACK elbowFront()
+{
+	elbow1 = (elbow1 - 5) % 360;
+}
+
+void CALLBACK elbowBack()
+{
+	elbow1 = (elbow1 + 5) % 360;
+}
+
+void CALLBACK shoulderFront()
+{
+	shoulder1 = (shoulder1 - 5) % 360;
+}
+
+void CALLBACK shoulderBack()
+{
+	shoulder1 = (shoulder1 + 5) % 360;
 }
 
 void CALLBACK shoulderAdd()
@@ -30,6 +51,8 @@ void CALLBACK shoulderSubtract()
 	shoulder = (shoulder - 5) % 360;
 }
 
+
+
 void CALLBACK display()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -39,14 +62,15 @@ void CALLBACK display()
 	glColor3f(1.0, 1.0, 1.0);
 
 	float lungimeBrat = 2;
-	glTranslatef(-lungimeBrat / 2, 0.0, 0.0);
 	glRotatef((GLfloat)shoulder, 0.0, 0.0, 1.0);
+	glRotatef((GLfloat)shoulder1 , 0.0, 1.0, 0.0);
 	glTranslatef(lungimeBrat / 2, 0.0, 0.0);
 	auxWireBox(lungimeBrat, 0.4, 1.0);
 
 	float lungimeAntebrat = 1.5;
 	glTranslatef(lungimeBrat / 2, 0.0, 0.0);
 	glRotatef((GLfloat)elbow, 0.0, 0.0, 1.0);
+	glRotatef((GLfloat)elbow1, 0.0, 1.0, 0.0);
 	glTranslatef(lungimeAntebrat / 2, 0.0, 0.0);
 	auxWireBox(lungimeAntebrat, 0.4, 1.0);
 
@@ -77,6 +101,10 @@ int main(int argc, char** argv)
 	auxKeyFunc(AUX_RIGHT, shoulderAdd);
 	auxKeyFunc(AUX_UP, elbowAdd);
 	auxKeyFunc(AUX_DOWN, elbowSubtract);
+	auxKeyFunc(AUX_w, shoulderFront);
+	auxKeyFunc(AUX_s, shoulderBack);
+	auxKeyFunc(AUX_a, elbowFront);
+	auxKeyFunc(AUX_d, elbowBack);
 	auxReshapeFunc(myReshape);
 	auxMainLoop(display);
 	return 0;
