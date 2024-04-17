@@ -13,6 +13,7 @@ void myInit()
 {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glShadeModel(GL_SMOOTH);
+	glEnable(GL_DEPTH_TEST);
 }
 
 void CALLBACK display()
@@ -25,11 +26,11 @@ void CALLBACK display()
 	glColor3f(1.0, 0.0, 0.0);
 	glRotatef(30, 1.0, 1.0, 0.0);
 
-	//glEnable(GL_CULL_FACE); //activeaza eliminarea fetelor
-	//glCullFace(GL_BACK); //sunt eliminate fetele spate
+	glEnable(GL_CULL_FACE); //activeaza eliminarea fetelor
+	glCullFace(GL_FRONT); //sunt eliminate fetele spate
 	//inlocuiti cu GL_FRONT pentru fete fata
 	//glEnable(GL_DEPTH_TEST);
-	
+	glFrontFace(GL_CW);
 	glBegin(GL_QUAD_STRIP); {
 		glColor3f(1.0f, 0.0f, 1.0f);
 		glVertex3f(-0.5f, 0.5f, 0.5f);
@@ -115,6 +116,7 @@ int main(int argc, char** argv)
 	auxInitWindow("CUB");
 	myInit();
 	auxReshapeFunc(myReshape);
+	auxKeyFunc(AUX_LEFT,)
 	auxMainLoop(display);
 	return 0;
 }
