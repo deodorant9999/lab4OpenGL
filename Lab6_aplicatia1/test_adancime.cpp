@@ -13,12 +13,23 @@
 void myInit()
 {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
-	glEnable(GL_DEPTH_TEST);
+	//glEnable(GL_DEPTH_TEST);
 }
 
 void CALLBACK display()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	
+	
+	glColor3f(0.0, 1.0, 0.0);
+	glBegin(GL_TRIANGLES);
+	{
+		glVertex3f(-0.9, -0.9, -40.0);
+		glVertex3f(-0.9, 0.9, -40.0);
+		glVertex3f(0.9, 0.0, -25.0);
+	}
+	glEnd();
 
 	glColor3f(1.0, 0.0, 0.0);
 	glBegin(GL_TRIANGLES);
@@ -26,15 +37,6 @@ void CALLBACK display()
 		glVertex3f(0.9, -0.9, -30.0);
 		glVertex3f(0.9, 0.9, -30.0);
 		glVertex3f(-0.9, 0.0, -30.0);
-	}
-	glEnd();
-
-	glColor3f(0.0, 1.0, 0.0);
-	glBegin(GL_TRIANGLES);
-	{
-		glVertex3f(-0.9, -0.9, -40.0);
-		glVertex3f(-0.9, 0.9, -40.0);
-		glVertex3f(0.9, 0.0, -25.0);
 	}
 	glEnd();
 
