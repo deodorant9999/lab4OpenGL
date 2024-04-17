@@ -22,9 +22,9 @@ void CALLBACK display()
 	glTranslatef(0.0, 0.0, -4.0);
 
 	glColor3f(1.0, 0.0, 0.0);
-	//glEnable(GL_CULL_FACE);//activeaza eliminarea fetelor
-	//glCullFace(GL_BACK);//sunt eliminate fetele spate
-	//inlocuiti cu GL_FRONT pentru fete fata
+	glEnable(GL_CULL_FACE);//activeaza eliminarea fetelor
+	glCullFace(GL_BACK);//sunt eliminate fetele spate
+
 
 	//orientare GL_CCW-implicita ca orientare directa
 	glBegin(GL_POLYGON);
@@ -38,6 +38,7 @@ void CALLBACK display()
 
 	glColor3f(0.0, 1.0, 0.0);
 	//orientare GL_CW-implicita ca orientare indirecta
+	glFrontFace(GL_CW);
 	glBegin(GL_POLYGON);
 	{
 		glVertex2f(1.0, 1.0);
