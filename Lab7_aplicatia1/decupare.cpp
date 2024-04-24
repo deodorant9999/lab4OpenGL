@@ -30,9 +30,9 @@ void CALLBACK display()
 {	// se definesc coeficientii A, B, C, D din ecuatia planuluide decupare GL_CLIP_PLANE0, ecuatia: x=1
 	GLdouble eqn0[4] = { 1.0, 0.0, 0.0, 1.0 };
 	// se definesc coeficientii A, B, C, D din ecuatia planului de decupare GL_CLIP_PLANE1, ecuatia: -x=1
-	GLdouble eqn1[4] = { -1.0, 0.0, 0.0, 1.0 };
+	GLdouble eqn1[4] = { -1, 0.0, 0.0, 1.0 };
 	// se definesc coeficientii A, B, C, D din ecuatia planului de decupare GL_CLIP_PLANE2, ecuatia: y=1
-	GLdouble eqn2[4] = { 0.0, 1.0, 0.0, 1.0 };
+	GLdouble eqn2[4] = { 0.0, 100.0, 0.0, 1.0 };
 	// se definesc coeficientii A, B, C, D din ecuatia planului de decupare GL_CLIP_PLANE3, ecuatia: -y=1
 	GLdouble eqn3[4] = { 0.0, -1.0, 0.0, 1.0 };
 
@@ -45,16 +45,16 @@ void CALLBACK display()
 	/*    se defineste planul de decupare  GL_CLIP_PLANE0    */
 	glClipPlane(GL_CLIP_PLANE0, eqn0);
 	/*    se activeaza planul de decupare  GL_CLIP_PLANE0    */
-	glEnable(GL_CLIP_PLANE0);
+	//glEnable(GL_CLIP_PLANE0);
 
 	glClipPlane(GL_CLIP_PLANE1, eqn1);
-	glEnable(GL_CLIP_PLANE1);
+	//glEnable(GL_CLIP_PLANE1);
 
 	glClipPlane(GL_CLIP_PLANE2, eqn2);
 	glEnable(GL_CLIP_PLANE2);
 
 	glClipPlane(GL_CLIP_PLANE3, eqn3);
-	glEnable(GL_CLIP_PLANE3);
+	//glEnable(GL_CLIP_PLANE3);
 
 	glRotatef(90.0, 1.0, 1.0, 0.0);
 	auxSolidSphere(2.0);
